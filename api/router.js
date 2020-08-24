@@ -163,21 +163,41 @@ exports.routers = (app) => {
     app.post('/api/getPPL', function (req, res, next) {
         const pplTime =  req.body.time
         pool.getConnection((err, conn) => {
-            var sql = "select * From ppl where ?<=pEndTime and ?>=pStartTime";
-            conn.query(sql, [pplTime, pplTime], (err, result) => {
-              conn.release();
-              if (err) {
-                res.send(300, {
-                  result: 0,
-                  msg: 'DB Error'
-                });
-              }
-              else {
-                return responseHandle(res, result);    
-              }
+            var sql = "select ppl.*, count(user_has_ppl.ppl_pId) as pLike from ppl, user_has_ppl where ppl.pId=user_has_ppl.ppl_pId and ?<=ppl.pEndTime and ?>=ppl.pStartTime group by user_has_ppl.ppl_pId";
+              conn.query(sql, [pplTime, pplTime], (err, result) => {
+                conn.release();
+                      if (err) {
+                        throw err;
+                      }
+                      console.log(res);
+                      return responseHandle(res, result)
+                    });
             });
-      })
-    });
+      });
+    /**
+     * @method POST
+     * @endpoint /api/getPPL
+     * @description PPL정보를 가져오는 요청
+     *
+     */
+    app.post('/api/getLikeNum', function (req, res, next) {
+      const pplTime =  req.body.time
+      pool.getConnection((err, conn) => {
+          var sql = "select count(case when ppl_pId=? then 1 and) as likNum from user_has_ppl ";
+          conn.query(sql, [pId], (err, result) => {
+            conn.release();
+            if (err) {
+              res.send(300, {
+                result: 0,
+                msg: 'DB Error'
+              });
+            }
+            else {
+              return responseHandle(res, result);    
+            }
+          });
+    })
+  });
     /**
      * @method POST
      * @endpoint /api/getLikeItem

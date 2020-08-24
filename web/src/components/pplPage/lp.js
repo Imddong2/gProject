@@ -13,12 +13,14 @@ class Listpage extends Component {
           Itemcard.map((itemdata, insertIndex) => {
             return (
               <Item
+                ImageURL={itemdata.pImg}
                 pId={itemdata.pId}
                 pImg={itemdata.pImg}
                 pComment={itemdata.pComment}
                 pName={itemdata.pName}
                 pPrice={itemdata.pPrice}
                 pLink={itemdata.pLink}
+                pLike={itemdata.pLike}
               />
             );
           })}

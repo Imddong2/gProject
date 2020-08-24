@@ -116,7 +116,7 @@ export default class App extends React.Component {
                     {currentUser ?  null :<Link to='/login'  style={{ textDecoration: 'none', color: 'black'}}>로그인 &nbsp; </Link>}
                     {currentUser ?  null : <Link to='/register' style={{ textDecoration: 'none', color: 'black' }}>회원가입</Link>}
                     {currentUser ? <Link to='/watch/live' style={{ textDecoration: 'none', color: 'black' }}>LIVE  </Link> : null}
-                    {currentUser ? <Link to='/mypage' style={{ textDecoration: 'none', color: 'black' }}>마이페이지  </Link> : null}
+                    {currentUser ? <Link to='/mypage' style={{ textDecoration: 'none', color: 'black' }}>| MYPAGE  </Link> : null}
                     </MenuItemBox>
                     {currentUser ? <UserTitle>{_.get(currentUser, 'name', '')}</UserTitle> : null}
                     <Form>
@@ -139,7 +139,7 @@ export default class App extends React.Component {
             </Main>
             <Footer>
                 <Container>
-                    <Copyright>® 2020 동서대학교 컴퓨터공학부 임현진 졸업작품.</Copyright>
+                    <Copyright>® 2020 Division of Computer Engineering, Dongseo University Hyeon-Jin Im.</Copyright>
                 </Container>
             </Footer>
         </AppWrapper>

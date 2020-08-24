@@ -150,6 +150,7 @@ export default class Store {
     getPPL(pplTime,cb=()=>{
     }){
         this.service.post('/api/getPPL', {time: pplTime}).then((res)=>{
+            console.log(res);
            const PPL = _.get(res,'data',null);
            this.savePPLStorage(PPL);
            return cb(null, res.data);

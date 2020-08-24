@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
 import Store from "../../../store";
+ 
+ const Img = styled.img`
+ float: left;
+ width: 100px;
+ height: 130px;
+ margin-right: 10px;
+ margin-bottom: 10px;
+ border-right: 1px solid #ddd;
+ `
  const PPLWrapper = styled.li`
     overflow: hidden;
     border-bottom: 1px solid #ddd;
@@ -18,6 +27,7 @@ import Store from "../../../store";
         font-weight: 600;
 
 `
+
 class Item extends Component{
     constructor(props) {
         super(props);
@@ -37,13 +47,14 @@ class Item extends Component{
     render(){
         return <PPLWrapper>
         <PPLW>
+            <Img src={this.props.pImg} alt="" />
             <p>
               <span>{this.props.pComment}</span>
             </p>
-            <p>상품명 : {this.props.pName}</p>
-            <p>가격 : {this.props.pPrice}</p>
+            <p>product name : {this.props.pName}</p>
+            <p>price : {this.props.pPrice}</p>
             <a href={this.props.pLink} style={{textDecoration: 'none', color: 'blue'}} onclick="return false">{this.props.pLink}</a><br/>
-            <FormSubmit onClick={(e) => {this._likePPL()}} type={"submit"}>LIKE</FormSubmit>
+            <p>Like : {this.props.pLike}  <FormSubmit onClick={(e) => {this._likePPL()}} type={"submit"}>LIKE</FormSubmit></p>
         </PPLW>
     </PPLWrapper>
     }
